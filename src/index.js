@@ -4,7 +4,7 @@ module.exports = {
     hello: function() {
         return 'Hello, world!';
     },
-    init: function(settings, captureSettings) {
+    init: function(settings) {
         var janrainSettingsDefaults = {
             packages: ['login', 'capture', 'share'],
             appUrl: '',
@@ -51,8 +51,8 @@ module.exports = {
             confirmModalClose: '',
         };
 
-        janrain.settings = merge_objects(janrainSettingsDefaults, settings || {});
-        janrain.settings.capture = merge_objects(janrainSettingsCaptureDefaults, captureSettings || {});
+        janrain.settings = merge_objects(janrainSettingsDefaults, settings.settings || {});
+        janrain.settings.capture = merge_objects(janrainSettingsCaptureDefaults, settings.capture || {});
 
         var e = document.createElement('script');
         e.type = 'text/javascript';
@@ -69,7 +69,10 @@ module.exports = {
             janrain.capture.ui.endCaptureSession();
         });
         var janrainModalMarkup = { gulp_inject: '../dest/janrain.html' };
-        document.body.innerHTML += janrainModalMarkup;
+        var omitMarkup = settings.omitMarkup || 0;
+        if(!omitMarkup){
+            document.body.innerHTML += janrainModalMarkup;
+        }
     }
 };
 
