@@ -1,0 +1,231 @@
+<div class="janrain-modals">
+    <div style="display:none;" id="resetPassword">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Change password</span>
+            {* newPasswordForm *}
+                {* newPassword *}
+                {* newPasswordConfirm *}
+                {* submitButton *}
+            {* /newPasswordForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="resetPasswordSuccess">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Your password has been changed</span>
+            <p>Password has been successfully updated.</p>
+            <a href="#" class="cmOpenJanrainModal capture_btn capture_primary">Sign in</a>
+        </div>
+    </div>
+
+    <div style="display:none;" id="forgotPasswordSuccess">
+        <div class="capture_header">
+            <span class="janrain-h1">Email sent</span>
+        </div>
+        <p>We have sent you an email with a link to change your password.</p>
+    </div>
+
+    <div style="display:none;" id="resetPasswordRequestCode">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Create a new password</span>
+            <p>We didn't recognize that password reset code. Enter your email address to get a new one.</p>
+            {* #forgotPasswordForm *}
+            {* forgotPassword_emailAddress *}
+            {* forgotPassword_sendButton *}
+            {* /forgotPasswordForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="resetPasswordRequestCodeSuccess">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Create a new password</span>
+            <p>We've sent an email with instructions to create a new password. Your existing password has not been changed.</p>
+            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</a>
+        </div>
+    </div>
+
+    <div style="display:none;" id="signIn">
+        <div class="janrain-wrapper">
+            <p:include url="/PortalConfig/common/widgets/janrain/signInFirstTime.jpt"/>
+        </div>
+    </div>
+
+    <div style="display:none;" id="returnSocial">
+        <div class="janrain-wrapper">
+            <p:include url="/PortalConfig/common/widgets/janrain/signInFirstTime.jpt"/>
+        </div>
+    </div>
+
+    <div style="display:none;" id="returnTraditional">
+        <div class="janrain-wrapper">
+            <p:include url="/PortalConfig/common/widgets/janrain/signInFirstTime.jpt"/>
+        </div>
+    </div>
+
+    <div style="display:none;" id="socialRegistration">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">You're Almost Done!</span>
+            <h2>Please confirm the information below before signing in.</h2>
+            <div class="janrain-required">*Required</div>
+            {* #socialRegistrationForm *}
+                {* socialRegistration_displayName *}
+                {* socialRegistration_emailAddress *}
+
+                <div class="janrain-tocnotice">By submitting your registration information, you agree to our
+                  <a href="TODO visitor_agreement" target="_blank">Visitor Agreement</a> and <a href="TODO privacy_policy" target="_blank">Privacy Policy</a>.</div>
+                {* socialRegistration_signInButton *}
+            {* /socialRegistrationForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="traditionalRegistration">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Register</span>
+            <div class="janrain-required">*Required</div>
+            {* #registrationForm *}
+
+                {* traditionalRegistration_emailAddress *}
+                {* traditionalRegistration_password *}
+                {* traditionalRegistration_passwordConfirm *}
+
+                {* traditionalRegistration_displayName *}
+
+                {# TODO: tos/privacy urls #}
+                <div class="janrain-tocnotice">By submitting your registration information, you agree to our
+                  <a href="TODO visitor_agreement" target="_blank">Visitor Agreement</a> and <a href="TODO privacy_policy" target="_blank">Privacy Policy</a>.</div>
+
+                {* createAccountButton *}
+            {* /registrationForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="traditionalRegistrationBlank">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Create a New Account</span>
+            <div class="janrain-required">*Required</div>
+            {* #registrationFormBlank *}
+
+                {* traditionalRegistration_emailAddressBlank *}
+                {* traditionalRegistration_passwordBlank *}
+                {* traditionalRegistration_passwordConfirmBlank *}
+                {* traditionalRegistration_displayName *}
+                {# TODO: tos/privacy urls #}
+                <div class="janrain-tocnotice">By submitting your registration information, you agree to our
+                    <a href="#" target="blank">Visitor Agreement</a> and <a href="#" target="blank">Privacy Policy</a>.</div>
+
+                {* createAccountButton *}
+            {* /registrationForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="registrationSuccess">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Just One More Thing...</span>
+            <p>We have sent you a verification email. Please check your email and click on the link to activate your site profile.</p>
+            <p>If you do not receive the verification message within a few minutes of signing up, please check your Spam or Junk folder.</p>
+            <span onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</span>
+        </div>
+    </div>
+
+    <div style="display:none;" id="registrationSuccessConfirmed">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Thank you for registering!</span>
+            <p>We look forward to seeing you frequently. Visit us and sign in to update your profile, receive the latest news and keep up to date with mobile alerts.</p>
+            <p>
+            Click <a href="#"  onclick="janrain.capture.ui.modal.close()">here</a> to return to the page you were visiting.
+            </p>
+        </div>
+    </div>
+
+    <div style="display:none;" id="forgotPassword">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Create a new password</span>
+            <p>Don't worry, it happens. We'll send you a link to create a new password.</p>
+            {* #forgotPasswordForm *}
+            {* forgotPassword_emailAddress *}
+            {* forgotPassword_sendButton *}
+            {* /forgotPasswordForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="forgotPasswordSuccess">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Email sent</span>
+            <p>We have sent you an email with a link to change your password.</p>
+            <a href="#" onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</a>
+        </div>
+    </div>
+
+    <div style="display:none;" id="mergeAccounts">
+        {* mergeAccounts *}
+    </div>
+
+    <div style="display:none;" id="traditionalAuthenticateMerge">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Sign in to complete account merge</span>
+            {* #tradAuthenticateMergeForm *}
+                {* traditionalSignIn_emailAddress *}
+                {* mergePassword *}
+                {* backButton *}
+                {* traditionalSignIn_signInButton *}
+            {* /tradAuthenticateMergeForm *}
+        </div>
+    </div>
+
+    <div style="display:none;" id="resendVerification">
+        <div class="janrain-wrapper">
+            <div class="capture_header">
+                <span class="janrain-h1">Resend Email Verification</span>
+            </div>
+            <p>Click submit to receive another verification email</p>
+            {* #resendVerificationForm *}
+                {* traditionalSignIn_emailAddress *}
+                <div class="capture_footer">
+                    <input type="submit" value="Submit" class="capture_btn capture_primary" />
+                </div>
+             {* /resendVerificationForm *}
+         </div>
+    </div>
+
+    <div style="display:none;" id="resendVerificationSuccess">
+        <div class="janrain-wrapper">
+            <div class="capture_header">
+                <span class="janrain-h1">Your Verification Email Has Been Sent</span>
+            </div>
+            <div class="hr"></div>
+            <p>Check your email for a verification link</p>
+            <div class="capture_footer">
+                <button onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none" id="verifyEmailSuccess">
+        <div class="janrain-wrapper">
+            <span class="janrain-h1">Thanks for verifying your email address.</span>
+            <p>You're now logged in.</p>
+            <div class="capture_footer">
+                <button onclick="janrain.capture.ui.modal.close()" class="capture_btn capture_primary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none" id="verifyEmail">
+        <div class="janrain-wrapper">
+            <div class="traditional-signin">
+              <span class="janrain-h1">Sign In</span>
+              <h2>It looks like you are already verified. If you still have trouble signing in, you probably need a <a href="#" data-capturescreen="resendVerification">new confirmation link email.</a></h2>
+              {* #userInformationForm *}
+                {* traditionalSignIn_emailAddress *}
+                {* traditionalSignIn_password *}
+                {* traditionalSignIn_signInButton *}
+                <div class="capture_centerText switchLink">
+                  <a href="#" data-cancelcapturereturnexperience="true">
+                    Use another account
+                  </a>
+                </div>
+              {* /userInformationForm *}
+            </div>
+        </div>
+    </div>
+</div>
