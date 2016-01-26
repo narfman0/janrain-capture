@@ -1,6 +1,13 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
+var jshint = require('gulp-jshint');
 var watch = require('gulp-watch');
+
+gulp.task('lint', function() {
+  return gulp.src('src/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
 
 gulp.task('build', function () {
   gulp.src('./src/janrain.html')
@@ -9,8 +16,7 @@ gulp.task('build', function () {
       transform: function (filePath, file) {
         return file.contents.toString('utf8')
       }
-    }))
-    .pipe(gulp.dest('./dest'));
+    })).pipe(gulp.dest('./dest'));
 });
 
 gulp.task('watch', function () {
@@ -19,4 +25,4 @@ gulp.task('watch', function () {
   });
 });
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['lint', 'build', 'watch']);

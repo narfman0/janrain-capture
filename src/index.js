@@ -69,7 +69,7 @@ module.exports = {
             janrain.capture.ui.endCaptureSession();
         });
     }
-}
+};
 
 function janrainReturnExperience() {
     var data = {

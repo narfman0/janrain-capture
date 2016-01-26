@@ -21,7 +21,9 @@
     "chai": "^3.4.1",
     "gulp": "^3.9.0",
     "gulp-inject": "^3.0.0",
+    "gulp-jshint": "^2.0.0",
     "gulp-watch": "^4.3.5",
+    "jshint": "^2.9.1",
     "mocha": "^2.3.4",
     "pubsub-js": "^1.5.3"
   }
