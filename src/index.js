@@ -68,6 +68,8 @@ module.exports = {
         pubsub.subscribe('authn-logout', function(){
             janrain.capture.ui.endCaptureSession();
         });
+        var janrainModalMarkup = { gulp_inject: '../dest/janrain.html' };
+        document.body.innerHTML += janrainModalMarkup;
     }
 };
 

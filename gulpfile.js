@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
+var injectHtml = require('gulp-inject-stringified-html');
 var jshint = require('gulp-jshint');
 var watch = require('gulp-watch');
 
@@ -17,6 +18,13 @@ gulp.task('build', function () {
         return file.contents.toString('utf8')
       }
     })).pipe(gulp.dest('./dest'));
+  gulp.run('js');
+});
+
+gulp.task('js', function () {
+  return gulp.src(['./src/index.js'])
+    .pipe(injectHtml())
+    .pipe(gulp.dest('./dest'));
 });
 
 gulp.task('watch', function () {
