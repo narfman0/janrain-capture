@@ -69,8 +69,8 @@ module.exports = {
             janrain.capture.ui.endCaptureSession();
         });
         var janrainModalMarkup = { gulp_inject: '../dest/janrain.html' };
-        var omitMarkup = settings.omitMarkup || 0;
-        if(!omitMarkup){
+        var useMarkup = settings.useMarkup || 1;
+        if(!useMarkup){
             document.body.innerHTML += janrainModalMarkup;
         }
     }
