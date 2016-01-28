@@ -68,9 +68,13 @@ module.exports = {
         pubsub.subscribe('authn-logout', function(){
             janrain.capture.ui.endCaptureSession();
         });
-        var janrainModalMarkup = { gulp_inject: '../dest/janrain.html' };
-        if(settings.useMarkup || 1 && typeof janrainModalMarkup === "string"){
-            document.body.innerHTML += janrainModalMarkup;
+        var janrainModalHTML = { gulp_inject: '../dest/janrain.html' };
+        if(settings.useHTML || 1 && typeof janrainModalHTML === "string"){
+            document.body.innerHTML += janrainModalHTML;
+        }
+        var janrainModalCSS = { gulp_inject: '../dest/janrain.css' };
+        if(settings.useCSS || 1 && typeof janrainModalCSS === "string"){
+            document.head.innerHTML += '<style>' + janrainModalCSS + '</style>';
         }
     }
 };
