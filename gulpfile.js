@@ -11,11 +11,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('build', function () {
-  gulp.run('html');
-  gulp.run('js');
-  gulp.run('sass');
-});
+gulp.task('build', ['html', 'js', 'sass'], function () {});
 
 gulp.task('js', function () {
   return gulp.src(['./js/index.js'])
