@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
 var injectHtml = require('gulp-inject-stringified-html');
+var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
@@ -27,6 +28,11 @@ gulp.task('html', function () {
         return file.contents.toString('utf8');
       }
     })).pipe(gulp.dest('./dest'));
+});
+
+gulp.task('test', function() {
+  return gulp.src('./test/**/*.js', {read: false})
+    .pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task('sass', function() {
