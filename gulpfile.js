@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var babel = require("gulp-babel");
 var clean = require('gulp-clean');
 var inject = require('gulp-inject');
 var injectHtml = require('gulp-inject-stringified-html');
@@ -23,6 +24,7 @@ gulp.task('clean', function () {
 gulp.task('js', function () {
   return gulp.src(['./js/index.js'])
     .pipe(injectHtml())
+    .pipe(babel())
     .pipe(gulp.dest('./dist'));
 });
 
