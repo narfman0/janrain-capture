@@ -1,5 +1,3 @@
-var pubsub = require('pubsub-js');
-
 module.exports = {
     init: function(settings) {
         var janrainSettingsDefaults = {
@@ -52,6 +50,13 @@ module.exports = {
         janrain.settings = merge_objects(janrainSettingsDefaults, settings.settings || {});
         janrain.settings.capture = merge_objects(janrainSettingsCaptureDefaults, settings.capture || {});
 
+        if(!janrain.settings.pubsub && console){
+            console.warn('Pubsub not set, please add pubsub to settings in janrain-capture.init');
+            janrain.settings.pubsub = function(name, meth){
+                console.log(name + ' event fired with no pubsub');
+            }
+        }
+
         var e = document.createElement('script');
         e.type = 'text/javascript';
         e.id = 'janrainAuthWidget';
@@ -63,7 +68,7 @@ module.exports = {
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(e, s);
 
-        pubsub.subscribe('authn-logout', function(){
+        janrain.settings.pubsub.subscribe('authn-logout', function(){
             janrain.capture.ui.endCaptureSession();
         });
         var janrainModalHTML = { gulp_inject: '../dist/janrain.html' };
@@ -89,7 +94,7 @@ module.exports = {
             datumName = janrain.settings.capture.returnExpernienceNameMap[datumName] || datumName;
             data[datumName] = janrain.capture.ui.getReturnExperienceData(datumName);
         }
-        pubsub.publish("authn-login", data);
+        janrain.settings.pubsub.publish("authn-login", data);
     },
 
     merge_objects: function(obj1, obj2) {
@@ -117,7 +122,7 @@ module.exports = {
         });
 
         janrain.events.onCaptureSessionNotFound.addHandler(function(result) {
-            pubsub.publish("authn-anonymous");
+            janrain.settings.pubsub.publish("authn-anonymous");
         });
 
         janrain.events.onCaptureRegistrationSuccess.addHandler(function(result) {
@@ -137,15 +142,15 @@ module.exports = {
         janrain.events.onCaptureRenderComplete.addHandler(function(result) {
             if (window.console && window.console.log)
                 console.log('janrain.onCaptureRenderComplete: ' + result);
-            pubsub.publish("login-modal-render-complete", janrainModalSelector);
+            janrain.settings.pubsub.publish("login-modal-render-complete", janrainModalSelector);
         });
 
         janrain.events.onModalOpen.addHandler(function() {
-            pubsub.publish("login-modal-open", janrainModalSelector);
+            janrain.settings.pubsub.publish("login-modal-open", janrainModalSelector);
         });
 
         janrain.events.onModalClose.addHandler(function() {
-            pubsub.publish("login-modal-close", janrainModalSelector);
+            janrain.settings.pubsub.publish("login-modal-close", janrainModalSelector);
         });
 
         janrain.capture.ui.start();
