@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var clean = require('gulp-clean');
 var inject = require('gulp-inject');
 var injectHtml = require('gulp-inject-stringified-html');
 var mocha = require('gulp-mocha');
@@ -14,10 +15,15 @@ gulp.task('lint', function() {
 
 gulp.task('build', ['html', 'js', 'sass'], function () {});
 
+gulp.task('clean', function () {
+  return gulp.src('./dist', {read: false})
+    .pipe(clean())
+});
+
 gulp.task('js', function () {
   return gulp.src(['./js/index.js'])
     .pipe(injectHtml())
-    .pipe(gulp.dest('./dest'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('html', function () {
@@ -27,7 +33,7 @@ gulp.task('html', function () {
       transform: function (filePath, file) {
         return file.contents.toString('utf8');
       }
-    })).pipe(gulp.dest('./dest'));
+    })).pipe(gulp.dest('./dist'));
 });
 
 gulp.task('test', function() {
@@ -38,7 +44,7 @@ gulp.task('test', function() {
 gulp.task('sass', function() {
   gulp.src('./sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./dest/'));
+    .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('watch', function () {

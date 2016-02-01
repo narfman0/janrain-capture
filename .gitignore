@@ -28,6 +28,7 @@ node_modules
 
 # Generatable dirs
 dest
+dist
 
 # Optional npm cache directory
 .npm

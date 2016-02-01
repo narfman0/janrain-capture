@@ -66,11 +66,11 @@ module.exports = {
         pubsub.subscribe('authn-logout', function(){
             janrain.capture.ui.endCaptureSession();
         });
-        var janrainModalHTML = { gulp_inject: '../dest/janrain.html' };
+        var janrainModalHTML = { gulp_inject: '../dist/janrain.html' };
         if(settings.useHTML || 1 && typeof janrainModalHTML === "string"){
             document.body.innerHTML += janrainModalHTML;
         }
-        var janrainModalCSS = { gulp_inject: '../dest/janrain.css' };
+        var janrainModalCSS = { gulp_inject: '../dist/janrain.css' };
         if(settings.useCSS || 1 && typeof janrainModalCSS === "string"){
             document.head.innerHTML += '<style>' + janrainModalCSS + '</style>';
         }
