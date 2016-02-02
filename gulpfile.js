@@ -25,14 +25,14 @@ gulp.task('clean', function () {
 });
 
 gulp.task('compress', ['js'], function() {
-  return gulp.src('dist/index.js')
+  return gulp.src('dist/janrain-capture.js')
     .pipe(uglify())
-    .pipe(concat('index.min.js'))
+    .pipe(concat('janrain-capture.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('js', ['html', 'sass'], function () {
-  return gulp.src(['./js/index.js'])
+  return gulp.src(['./js/janrain-capture.js'])
     .pipe(injectHtml())
     .pipe(babel())
     .pipe(umd({
