@@ -52,12 +52,18 @@ function JanrainCapture(settings) {
         janrain.settings = merge_objects(janrainSettingsDefaults, settings.settings || {});
         janrain.settings.pubsub = settings.pubsub;
         janrain.settings.capture = merge_objects(janrainSettingsCaptureDefaults, settings.capture || {});
+        janrain.settings.modalSelectors = merge_objects(settings.modalSelectors || {});
 
         if(!janrain.settings.pubsub && window && window.console && window.console.log){
             console.warn('Pubsub not set, please add pubsub to settings in janrain-capture');
             janrain.settings.pubsub = function(name, meth){
                 console.log(name + ' event fired with no pubsub');
             };
+        }
+        // copy necessary global level functions to window. These are needed for janrain to function.
+        if(window){
+            window.janrainReturnExperience = janrainReturnExperience;
+            window.janrainCaptureWidgetOnLoad = janrainCaptureWidgetOnLoad;
         }
 
         var e = document.createElement('script');
@@ -76,18 +82,13 @@ function JanrainCapture(settings) {
         });
         var janrainModalHTML = { gulp_inject: '../dist/janrain.html' };
         if(settings.useHTML || 1 && typeof janrainModalHTML === "string"){
-            document.addEventListener('DOMContentReady', function () {
+            document.addEventListener('DOMContentLoaded', function () {
                 document.body.innerHTML += janrainModalHTML;
             });
         }
         var janrainModalCSS = { gulp_inject: '../dist/janrain.css' };
         if(settings.useCSS || 1 && typeof janrainModalCSS === "string"){
             document.head.innerHTML += '<style>' + janrainModalCSS + '</style>';
-        }
-        // copy necessary global level functions to window. These are needed for janrain to function.
-        if(window){
-            window.janrainReturnExperience = janrainReturnExperience;
-            window.janrainCaptureWidgetOnLoad = janrainCaptureWidgetOnLoad;
         }
     }
 
@@ -162,7 +163,7 @@ function JanrainCapture(settings) {
         function openRegistrationHandler(evt){
             janrain.capture.ui.modal.open('traditionalRegistration');
         }
-        var registrationElements = document.getElementsByClassName("capture_modal_registration");
+        var registrationElements = document.getElementsByClassName(janrain.settings.modalSelectors.registration);
         for(var i=0; i<registrationElements.length; i++){
             registrationElements[i].addEventListener('click', openRegistrationHandler);
             registrationElements[i].addEventListener('touchstart', openRegistrationHandler);
