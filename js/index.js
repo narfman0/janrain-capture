@@ -1,5 +1,5 @@
-module.exports = {
-    init: function(settings) {
+function JanrainCapture(settings) {
+    function init(settings) {
         var janrainSettingsDefaults = {
             packages: ['login', 'capture', 'share'],
             appUrl: '',
@@ -47,14 +47,17 @@ module.exports = {
             confirmModalClose: '',
         };
 
+        settings = settings || {};
+        janrain = window && window.janrain ? window.janrain : {};
         janrain.settings = merge_objects(janrainSettingsDefaults, settings.settings || {});
+        janrain.settings.pubsub = settings.pubsub;
         janrain.settings.capture = merge_objects(janrainSettingsCaptureDefaults, settings.capture || {});
 
-        if(!janrain.settings.pubsub && console){
-            console.warn('Pubsub not set, please add pubsub to settings in janrain-capture.init');
+        if(!janrain.settings.pubsub && window && window.console && window.console.log){
+            console.warn('Pubsub not set, please add pubsub to settings in janrain-capture');
             janrain.settings.pubsub = function(name, meth){
                 console.log(name + ' event fired with no pubsub');
-            }
+            };
         }
 
         var e = document.createElement('script');
@@ -73,7 +76,9 @@ module.exports = {
         });
         var janrainModalHTML = { gulp_inject: '../dist/janrain.html' };
         if(settings.useHTML || 1 && typeof janrainModalHTML === "string"){
-            document.body.innerHTML += janrainModalHTML;
+            document.addEventListener('DOMContentReady', function () {
+                document.body.innerHTML += janrainModalHTML;
+            });
         }
         var janrainModalCSS = { gulp_inject: '../dist/janrain.css' };
         if(settings.useCSS || 1 && typeof janrainModalCSS === "string"){
@@ -84,9 +89,16 @@ module.exports = {
             window.janrainReturnExperience = janrainReturnExperience;
             window.janrainCaptureWidgetOnLoad = janrainCaptureWidgetOnLoad;
         }
-    },
+    }
 
-    janrainReturnExperience: function() {
+    function merge_objects(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrnam in obj2) { obj3[attrnam] = obj2[attrnam]; }
+        return obj3;
+    }
+
+    function janrainReturnExperience() {
         var data = {};
         var userData = janrain.settings.capture.returnExperienceUserData;
         for(var i=0; i<userData.length; i++){
@@ -95,16 +107,9 @@ module.exports = {
             data[datumName] = janrain.capture.ui.getReturnExperienceData(datumName);
         }
         janrain.settings.pubsub.publish("authn-login", data);
-    },
+    }
 
-    merge_objects: function(obj1, obj2) {
-        var obj3 = {};
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-        for (var attrnam in obj2) { obj3[attrnam] = obj2[attrnam]; }
-        return obj3;
-    },
-
-    janrainCaptureWidgetOnLoad: function() {
+    function janrainCaptureWidgetOnLoad() {
         var janrainModalSelector = "#janrainModal";
 
         janrain.events.onCaptureLoginSuccess.addHandler(function(result) {
@@ -163,4 +168,6 @@ module.exports = {
             registrationElements[i].addEventListener('touchstart', openRegistrationHandler);
         }
     }
-};
+
+    init(settings);
+}

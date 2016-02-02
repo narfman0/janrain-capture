@@ -6,6 +6,7 @@ var injectHtml = require('gulp-inject-stringified-html');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
+var umd = require('gulp-umd');
 var watch = require('gulp-watch');
 
 gulp.task('lint', function() {
@@ -25,6 +26,14 @@ gulp.task('js', function () {
   return gulp.src(['./js/index.js'])
     .pipe(injectHtml())
     .pipe(babel())
+    .pipe(umd({
+      exports: function(file) {
+        return 'JanrainCapture';
+      },
+      namespace: function(file) {
+        return 'JanrainCapture';
+      },
+    }))
     .pipe(gulp.dest('./dist'));
 });
 
