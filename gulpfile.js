@@ -15,14 +15,14 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('build', ['html', 'js', 'sass'], function () {});
+gulp.task('build', ['html', 'sass', 'js'], function () {});
 
 gulp.task('clean', function () {
   return gulp.src('./dist', {read: false})
     .pipe(rm());
 });
 
-gulp.task('js', function () {
+gulp.task('js', ['html', 'sass'], function () {
   return gulp.src(['./js/index.js'])
     .pipe(injectHtml())
     .pipe(babel())
@@ -38,7 +38,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('html', function () {
-  gulp.src('./html/janrain.html')
+  return gulp.src('./html/janrain.html')
     .pipe(inject(gulp.src(['./html/signInFirstTime.html']), {
       starttag: '<!-- inject:signInFirstTime:{{ext}} -->',
       transform: function (filePath, file) {
@@ -53,7 +53,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('sass', function() {
-  gulp.src('./sass/**/*.scss')
+  return gulp.src('./sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist/'));
 });
