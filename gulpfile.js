@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var babel = require("gulp-babel");
-var clean = require('gulp-clean');
 var inject = require('gulp-inject');
 var injectHtml = require('gulp-inject-stringified-html');
-var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
+var mocha = require('gulp-mocha');
+var rm = require('gulp-rimraf');
 var sass = require('gulp-sass');
 var umd = require('gulp-umd');
 var watch = require('gulp-watch');
@@ -19,7 +19,7 @@ gulp.task('build', ['html', 'js', 'sass'], function () {});
 
 gulp.task('clean', function () {
   return gulp.src('./dist', {read: false})
-    .pipe(clean())
+    .pipe(rm());
 });
 
 gulp.task('js', function () {
