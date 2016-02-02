@@ -1,11 +1,13 @@
-var gulp = require('gulp');
+var concat = require('gulp-concat');
 var babel = require("gulp-babel");
+var gulp = require('gulp');
 var inject = require('gulp-inject');
 var injectHtml = require('gulp-inject-stringified-html');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var rm = require('gulp-rimraf');
 var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
 var umd = require('gulp-umd');
 var watch = require('gulp-watch');
 
@@ -15,11 +17,18 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('build', ['html', 'sass', 'js'], function () {});
+gulp.task('build', ['html', 'sass', 'js', 'compress'], function () {});
 
 gulp.task('clean', function () {
   return gulp.src('./dist', {read: false})
     .pipe(rm());
+});
+
+gulp.task('compress', ['js'], function() {
+  return gulp.src('dist/index.js')
+    .pipe(uglify())
+    .pipe(concat('index.min.js'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('js', ['html', 'sass'], function () {
@@ -59,7 +68,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('./js/**/*.js', ['js']);
+  gulp.watch('./js/**/*.js', ['js', 'compress']);
   gulp.watch('./html/**/*.html', ['html', 'js']);
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
