@@ -2,7 +2,7 @@
   "name": "janrain-capture",
   "version": "1.0.1",
   "description": "Janrain capture integration",
-  "main": "src/index.js",
+  "main": "src/janrain-capture.js",
   "scripts": {
     "test": "mocha test/*"
   },
