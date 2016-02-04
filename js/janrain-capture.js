@@ -56,8 +56,13 @@ function JanrainCapture(settings) {
 
         if(!janrain.settings.pubsub && window && window.console && window.console.log){
             console.warn('Pubsub not set, please add pubsub to settings in janrain-capture');
-            janrain.settings.pubsub = function(name, meth){
-                console.log(name + ' event fired with no pubsub');
+            janrain.settings.pubsub = {
+                publish: function(name, data){
+                    console.log(name + ' event fired with no pubsub');
+                },
+                subscribe: function(name, meth){
+                    console.log(name + ' event subscribed with no pubsub');
+                },
             };
         }
         // copy necessary global level functions to window. These are needed for janrain to function.
