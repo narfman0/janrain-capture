@@ -1,6 +1,6 @@
 {
   "name": "janrain-capture",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Janrain capture integration",
   "main": "src/index.js",
   "scripts": {
@@ -34,6 +34,6 @@
     "gulp-watch": "^4.3.5",
     "jshint": "^2.9.1",
     "mocha": "^2.3.4",
-    "pubsub-js": "^1.5.3"
+    "pubsubcutioner": "^1.1.2"
   }
 }

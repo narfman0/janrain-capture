@@ -3,6 +3,10 @@ Janrain Capture
 
 Configurable support and markup for janrain capture widget/modals
 
+Installation
+------------
+
+    npm install -D janrain-capture
 
 Settings
 --------
@@ -31,14 +35,14 @@ Example
     JanrainCapture({
         pubsub: amplify,
         settings: {
-        tokenUrl: 'http://www.yourbrand.com/',
-        loadurlHttps: "https://rpxnow.com/load/yourbrand",
-        loadurlHttp: "http://widget-cdn.rpxnow.com/load/yourbrand",
+            tokenUrl: 'http://www.yourbrand.com/',
+            loadurlHttps: "https://rpxnow.com/load/yourbrand",
+            loadurlHttp: "http://widget-cdn.rpxnow.com/load/yourbrand",
         },
         capture: {
-        appId: 'asdf1234asd123asd',
-        captureServer: 'https://users.yourbrand.com',
-        clientId: 'asdlkj123908qwepoi',
+            appId: 'asdf1234asd123asd',
+            captureServer: 'https://users.yourbrand.com',
+            clientId: 'asdlkj123908qwepoi',
         },
     });
 
